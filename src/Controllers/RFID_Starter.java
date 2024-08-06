@@ -4,11 +4,16 @@ import WebServiceCall.CventUtils;
 import WebServiceCall.Utils;
 
 import javax.swing.*;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.util.Objects;
+
+import static javax.swing.JOptionPane.*;
+
 public class RFID_Starter extends javax.swing.JFrame {
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton loginButton;
     private javax.swing.JButton startButton;
     private javax.swing.JButton stopButton;
     private javax.swing.JLabel jLabel1;
@@ -22,7 +27,8 @@ public class RFID_Starter extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     public static String token = "";
-    public static int isBsicAuth = 0;
+    public static int isBsicAuth = 0; //Restrict get and put method for login, start and stop
+
     public RFID_Starter() {
         initComponents();
     }
@@ -41,12 +47,12 @@ public class RFID_Starter extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        loginButton = new javax.swing.JButton();
+        JButton loginButton = new JButton();
         startButton = new javax.swing.JButton();
         stopButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("RFID Configuration");
+        setTitle("RFID");
         setPreferredSize(new java.awt.Dimension(700, 400));
         setResizable(false);
 
@@ -55,6 +61,7 @@ public class RFID_Starter extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel2.setLayout(new java.awt.GridBagLayout());
 
         java.net.URL iconURL = Login.class.getResource("/Icon/NECO_logo.png");
         if (iconURL != null) {
@@ -65,53 +72,38 @@ public class RFID_Starter extends javax.swing.JFrame {
         }
 
         // Make sure the image path is correct
-        jLabel1.setIcon(new ImageIcon(RFID_Starter.class.getResource("/Icon/logo.png"))); // NOI18N
+        jLabel1.setIcon(new ImageIcon(getClass().getResource("/Icon/ADC_bg1.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Showcard Gothic", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("RFID Starter API");
+        jLabel2.setText("   RFID CVENT");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 204, 204));
         jLabel3.setText("copyright © company name All rights reserved");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addGap(137, 137, 137)
-                                                .addComponent(jLabel1))
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addGap(72, 72, 72)
-                                                .addComponent(jLabel3))
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addGap(104, 104, 104)
-                                                .addComponent(jLabel2)))
-                                .addContainerGap(49, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(129, 129, 129)
-                                .addComponent(jLabel1)
-                                .addGap(30, 30, 30)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                                .addComponent(jLabel3)
-                                .addGap(64, 64, 64))
-        );
+        java.awt.GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.CENTER;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel2.add(jLabel1, gridBagConstraints);
+
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.weighty = 0;
+        jPanel2.add(jLabel2, gridBagConstraints);
+
+        gridBagConstraints.gridy = 2;
+        jPanel2.add(jLabel3, gridBagConstraints);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 0, 400, 500);
+        jPanel2.setBounds(0, 0, 400, 400);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-
-//        jLabel4.setBackground(new java.awt.Color(0, 102, 102));
-//        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-//        jLabel4.setText("RFID CVENT");
 
         jLabel5.setBackground(new java.awt.Color(102, 102, 102));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -128,21 +120,20 @@ public class RFID_Starter extends javax.swing.JFrame {
         loginButton.setBackground(new java.awt.Color(0, 102, 102));
         loginButton.setForeground(new java.awt.Color(255, 255, 255));
         loginButton.setText("Login");
-        loginButton.setPreferredSize(new java.awt.Dimension(400, 30));
+        loginButton.setPreferredSize(new java.awt.Dimension(100, 30));
 
         startButton.setBackground(new java.awt.Color(0, 102, 102));
         startButton.setForeground(new java.awt.Color(255, 255, 255));
         startButton.setText("Start");
-        startButton.setPreferredSize(new java.awt.Dimension(200, 30));
+        startButton.setPreferredSize(new java.awt.Dimension(100, 30));
         startButton.setEnabled(false);
 
         stopButton.setBackground(new java.awt.Color(0, 102, 102));
         stopButton.setForeground(new java.awt.Color(255, 255, 255));
         stopButton.setText("Stop");
-        stopButton.setPreferredSize(new java.awt.Dimension(200, 30));
+        stopButton.setPreferredSize(new java.awt.Dimension(100, 30));
         stopButton.setEnabled(false);
 
-        // Use GroupLayout for precise alignment
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -161,34 +152,29 @@ public class RFID_Starter extends javax.swing.JFrame {
                                         .addGroup(jPanel3Layout.createSequentialGroup()
                                                 .addComponent(jLabel7)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(stopButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addGap(101, 101, 101)
-                                                ))
-                                .addContainerGap(230, Short.MAX_VALUE))
+                                                .addComponent(stopButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(142, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
                 jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-
-                                .addGap(40, 40, 40)
+                                .addGap(100, 100, 100)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel5)
                                         .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(50, 50, 50)
+                                .addGap(40, 40, 40)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel6)
                                         .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(50, 50, 50)
+                                .addGap(40, 40, 40)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel7)
                                         .addComponent(stopButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(45, Short.MAX_VALUE))
+                                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(400, 0, 400, 300);
+        jPanel3.setBounds(400, 0, 300, 400);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -209,24 +195,12 @@ public class RFID_Starter extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 isBsicAuth = 1;
                 System.out.println("Login button clicked");
-                String url = "https://192.168.1.88/cloud/localRestLogin";
+                String code = updateBearerToken();
                 String message = "Login Failed";
-                try {
-                    String response = String.valueOf(Utils.WebServiceCall(url));
-                    JSONObject myResponse = new JSONObject(response);
-                    String code = myResponse.optString("code");
-                    if (code.equals("0")) {
-                        message = "Login Successfully";
-                        token = myResponse.optString("message");
-                        System.out.println("Token is :" + token);
-                        startButton.setEnabled(true);
-                        stopButton.setEnabled(false);
-                    } else {
-                        message = "Login Failed";
-                    }
-                    System.out.println("Response is :" + response);
-                } catch (Exception ex) {
-                    message = "Internal Error occurred " + ex;
+                if(code.equals("0")) {
+                    message = "Login Successfully";
+                    startButton.setEnabled(true);
+                    stopButton.setEnabled(false);
                 }
                 JOptionPane.showMessageDialog(
                        jPanel1,
@@ -239,12 +213,21 @@ public class RFID_Starter extends javax.swing.JFrame {
 
         startButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                int choice = JOptionPane.showConfirmDialog(
+                        jPanel1,
+                        "are you sure you want to start the RFID Reader",
+                        "Message",
+                        JOptionPane.YES_NO_OPTION
+                );
+                if(choice==NO_OPTION){
+                    return;
+                }
                 isBsicAuth = 0;
                 System.out.println("Start button clicked");
                 String message = "";
                 String url = "https://192.168.1.88/cloud/start";
                 try {
-                    String response = String.valueOf(new Utils().WebServiceCall(url));
+                    String response = String.valueOf(Utils.WebServiceCall(url));
                     if (Utils.statusCode == 200) {
                         System.out.println("Reader Started Successfully");
                         message = "Reader Started Successfully";
@@ -264,9 +247,10 @@ public class RFID_Starter extends javax.swing.JFrame {
                 if(Utils.statusCode==200){
                     url= "https://events.adc.coop/RFIDStartCheck.php?Flag=1";
                     try {
-                        String response = String.valueOf(new CventUtils().WebServiceCall(url));
+                        String response = String.valueOf(CventUtils.WebServiceCall(url));
+                        System.out.println("response of cvent server :"+response);
                     } catch (Exception ex) {
-                        message = "Failed to reach CVENT server";
+                        message = "RFID reader started but failed to reach CVENT server";
                         System.out.println("Internal Error Occured "+ex);
                     }
                 }
@@ -281,12 +265,24 @@ public class RFID_Starter extends javax.swing.JFrame {
 
         stopButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                isBsicAuth = 0;
+                int choice = JOptionPane.showConfirmDialog(
+                        jPanel1,
+                        "are you sure you want to stop the RFID Reader",
+                        "Message",
+                        JOptionPane.YES_NO_OPTION
+                );
+                if(choice==NO_OPTION){
+                    return;
+                }
+                isBsicAuth = 1;
                 System.out.println("Stop button clicked");
+                String code = updateBearerToken();
                 String url = "https://192.168.1.88/cloud/stop";
                 String message = "Reader Failed to Stop";
+                System.out.println("Code :"+code);
                 try {
-                    String response = String.valueOf(new Utils().WebServiceCall(url));
+                    isBsicAuth = 0;
+                    String response = String.valueOf(Utils.WebServiceCall(url));
                     if (Utils.statusCode == 200) {
                         System.out.println("Reader Stopped Successfully");
                         message = "Reader Stopped Successfully";
@@ -299,15 +295,16 @@ public class RFID_Starter extends javax.swing.JFrame {
                 } catch (Exception ex) {
                     startButton.setEnabled(true);
                     stopButton.setEnabled(true);
-                    message = "Internal Error Occurred " + ex;
+                    message = "Bearer token has expired click login to update token and stop again";
                 }
                 if(Utils.statusCode==200){
                     url = "https://events.adc.coop/RFIDStartCheck.php?Flag=0";
                     try {
-                        String response = String.valueOf(new CventUtils().WebServiceCall(url));
+                        String response = String.valueOf(CventUtils.WebServiceCall(url));
+                        System.out.println("Response is :"+response);
                     } catch (Exception ex) {
                         System.out.println("Internal Error Occured "+ex);
-                        message = "Failed to reach CVENT server";
+                        message = "RFID reader stopped but failed to reach CVENT server";
                     }
                 }
                 JOptionPane.showMessageDialog(
@@ -322,26 +319,26 @@ public class RFID_Starter extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        Login LoginFrame = new Login();
-        LoginFrame.setVisible(true);
-        LoginFrame.pack();
-        LoginFrame.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RFID_Starter().setVisible(true);
-            }
-        });
+    public static void main(String[] args) {
+        java.awt.EventQueue.invokeLater(() -> new RFID_Starter().setVisible(true));
     }
 
-
+   public String updateBearerToken(){
+        String url = "https://192.168.1.88/cloud/localRestLogin";
+        String code = "";
+        try {
+            String response = String.valueOf(Utils.WebServiceCall(url));
+            JSONObject myResponse = new JSONObject(response);
+            code = myResponse.optString("code");
+            token =(Objects.equals(code, "0"))? myResponse.optString("message"):"";
+        } catch (Exception e) {
+            System.out.println("Internal exception :"+e);
+        }
+        return code;
+    }
     // End of variables declaration//GEN-END:variables
 }
