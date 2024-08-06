@@ -3,6 +3,8 @@ package Controllers;
 
 
 import javax.swing.*;
+import java.awt.*;
+import java.util.Objects;
 
 public class Login extends javax.swing.JFrame {
 
@@ -12,24 +14,24 @@ public class Login extends javax.swing.JFrame {
     }
 
 
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        Right = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        Left = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        ipTextField = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jPortField = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        JPanel jPanel1 = new JPanel();
+        JPanel right = new JPanel();
+        JLabel jLabel5 = new JLabel();
+        JLabel jLabel6 = new JLabel();
+        JLabel jLabel7 = new JLabel();
+        // Variables declaration - do not modify//GEN-BEGIN:variables
+        JPanel left = new JPanel();
+        JLabel jLabel1 = new JLabel();
+        JLabel jLabel2 = new JLabel();
+        JTextField ipTextField = new JTextField();
+        JLabel jLabel3 = new JLabel();
+        JTextField jPortField = new JTextField();
+        JButton jButton1 = new JButton();
+        JLabel jLabel4 = new JLabel();
+        JButton jButton2 = new JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RFID CVENT");
@@ -48,21 +50,21 @@ public class Login extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
         jPanel1.setLayout(null);
 
-        Right.setBackground(new java.awt.Color(0, 102, 102));
-        Right.setPreferredSize(new java.awt.Dimension(400, 500));
+        right.setBackground(new java.awt.Color(0, 102, 102));
+        right.setPreferredSize(new java.awt.Dimension(400, 500));
 
        // jLabel5.setIcon(new ImageIcon(Login.class.getResource("/Icon/logo.png"))); // NOI18N
-        jLabel5.setIcon(new ImageIcon(Login.class.getResource("/Icon/ADC_bg1.png")));
-        jLabel6.setFont(new java.awt.Font("Showcard Gothic", 1, 24)); // NOI18N
+        jLabel5.setIcon(new ImageIcon(Objects.requireNonNull(Login.class.getResource("/Icon/ADC_bg1.png"))));
+        jLabel6.setFont(new java.awt.Font("Showcased Gothic", Font.BOLD, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("   RFID CVENT");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segue UI Light", Font.PLAIN, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(204, 204, 204));
         jLabel7.setText("copyright © CVENT All rights reserved");
 
-        javax.swing.GroupLayout RightLayout = new javax.swing.GroupLayout(Right);
-        Right.setLayout(RightLayout);
+        javax.swing.GroupLayout RightLayout = new javax.swing.GroupLayout(right);
+        right.setLayout(RightLayout);
         RightLayout.setHorizontalGroup(
                 RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RightLayout.createSequentialGroup()
@@ -91,57 +93,49 @@ public class Login extends javax.swing.JFrame {
                                 .addGap(78, 78, 78))
         );
 
-        jPanel1.add(Right);
-        Right.setBounds(0, 0, 400, 500);
+        jPanel1.add(right);
+        right.setBounds(0, 0, 400, 500);
 
-        Left.setBackground(new java.awt.Color(255, 255, 255));
-        Left.setMinimumSize(new java.awt.Dimension(400, 500));
+        left.setBackground(new java.awt.Color(255, 255, 255));
+        left.setMinimumSize(new java.awt.Dimension(400, 500));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segue UI", Font.BOLD, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("192.168.1.88");
 
         jLabel2.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segue UI", Font.PLAIN, 16)); // NOI18N
         jLabel2.setText("IP Address");
 
-        ipTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        ipTextField.setFont(new java.awt.Font("Segue UI", Font.PLAIN, 16)); // NOI18N
         // ipTextField.setForeground(new java.awt.Color(102, 102, 102));
         ipTextField.setText("192.168.1.88");
         ipTextField.setEditable(false);
         //jTextField1.setEnabled(false);
 
         jLabel3.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segue UI", Font.PLAIN, 16)); // NOI18N
         jLabel3.setText("Port");
 
         jPortField.setText("443");
-        jPortField.setFont(new java.awt.Font("Segoe UI", 0, 16));
+        jPortField.setFont(new java.awt.Font("Segue UI", Font.PLAIN, 16));
         jPortField.setEditable(false);
 
         jButton1.setBackground(new java.awt.Color(0, 102, 102));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Segue UI", Font.PLAIN, 16)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Connect");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        jButton1.addActionListener(this::jButton2ActionPerformed);
 
         jLabel4.setText("I don't have an account");
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Segue UI", Font.PLAIN, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 51, 51));
         jButton2.setText("Sign Up");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        jButton2.addActionListener(this::jButton2ActionPerformed);
 
-        javax.swing.GroupLayout LeftLayout = new javax.swing.GroupLayout(Left);
-        Left.setLayout(LeftLayout);
+        javax.swing.GroupLayout LeftLayout = new javax.swing.GroupLayout(left);
+        left.setLayout(LeftLayout);
         LeftLayout.setHorizontalGroup(
                 LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(LeftLayout.createSequentialGroup()
@@ -186,8 +180,8 @@ public class Login extends javax.swing.JFrame {
                                 .addContainerGap(77, Short.MAX_VALUE))
         );
 
-        jPanel1.add(Left);
-        Left.setBounds(400, 0, 400, 500);
+        jPanel1.add(left);
+        left.setBounds(400, 0, 400, 500);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -221,25 +215,5 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
-    /**
-     * @param args the command line arguments
-     */
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Left;
-    private javax.swing.JPanel Right;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jPortField;
-    private javax.swing.JTextField ipTextField;
     // End of variables declaration//GEN-END:variables
 }
