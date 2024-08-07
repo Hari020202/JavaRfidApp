@@ -36,7 +36,7 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RFID CVENT");
         setResizable(false);
-        setPreferredSize(new java.awt.Dimension(800, 500));
+        setPreferredSize(new java.awt.Dimension(850, 500));
 
         java.net.URL iconURL = Login.class.getResource("/Icon/NECO_logo.png");
         if (iconURL != null) {
@@ -47,7 +47,7 @@ public class Login extends javax.swing.JFrame {
         }
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
+        jPanel1.setPreferredSize(new java.awt.Dimension(850, 500));
         jPanel1.setLayout(null);
 
         right.setBackground(new java.awt.Color(0, 102, 102));
@@ -161,7 +161,7 @@ public class Login extends javax.swing.JFrame {
         LeftLayout.setVerticalGroup(
                 LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(LeftLayout.createSequentialGroup()
-                                .addGap(51, 51, 51)
+                                .addGap(40,40,40)
                                 .addComponent(jLabel1)
                                 .addGap(40, 40, 40)
                                 .addComponent(jLabel2)
@@ -181,7 +181,7 @@ public class Login extends javax.swing.JFrame {
         );
 
         jPanel1.add(left);
-        left.setBounds(400, 0, 400, 500);
+        left.setBounds(400, 0, 450, 500);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

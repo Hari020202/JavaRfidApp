@@ -8,7 +8,6 @@ import javax.net.ssl.SSLSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -46,7 +45,6 @@ public class Utils {
             con.disconnect();
             con = null;
             obj = null;
-            inputLine = null;
         } catch (MalformedURLException e) {
             Logger.getLogger(Utils.class.getName()).log(Level.WARNING, "URL Format Failure", e);
         } catch (IOException e) {
@@ -118,20 +116,4 @@ public class Utils {
         con.setUseCaches(false);
     }
 
-    public static void Authenticationphp(HttpURLConnection con) throws ProtocolException {
-        con.setRequestMethod("POST");
-        con.setDoOutput(true);
-        con.setRequestProperty("Authorization", "Basic " + encoding);
-
-        // If you need to send data with the POST request
-        String postData = "flag=1";
-        try (OutputStream os = con.getOutputStream()) {
-            byte[] input = postData.getBytes("utf-8");
-            os.write(input, 0, input.length);
-            con.setUseCaches(false);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
 }

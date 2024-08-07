@@ -4,7 +4,6 @@ import WebServiceCall.CventUtils;
 import WebServiceCall.Utils;
 import javax.swing.*;
 import org.json.JSONObject;
-
 import java.awt.*;
 import java.util.Objects;
 
@@ -88,6 +87,7 @@ public class RFID_Starter extends javax.swing.JFrame {
         jPanel2.add(jLabel3, gridBagConstraints);
 
 
+        assert jPanel1 != null;
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 0, 400, 400);
 
@@ -110,12 +110,14 @@ public class RFID_Starter extends javax.swing.JFrame {
         loginButton.setText("Login");
         loginButton.setPreferredSize(new java.awt.Dimension(100, 30));
 
+        assert startButton != null;
         startButton.setBackground(new java.awt.Color(0, 102, 102));
         startButton.setForeground(new java.awt.Color(255, 255, 255));
         startButton.setText("Start");
         startButton.setPreferredSize(new java.awt.Dimension(100, 30));
         startButton.setEnabled(false);
 
+        assert stopButton != null;
         stopButton.setBackground(new java.awt.Color(0, 102, 102));
         stopButton.setForeground(new java.awt.Color(255, 255, 255));
         stopButton.setText("Stop");
