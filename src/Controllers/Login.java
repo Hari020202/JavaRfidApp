@@ -2,13 +2,17 @@
 package Controllers;
 
 
+import jdk.nashorn.internal.scripts.JD;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
 public class Login extends javax.swing.JFrame {
 
-
+    private static String[] domainValues = {"eventsdev.adc.coop","events.adc.coop"};
+    public static JTextField jPortField;
+    public static JComboBox<String> ipComboBox;
     public Login() {
         initComponents();
     }
@@ -22,13 +26,12 @@ public class Login extends javax.swing.JFrame {
         JLabel jLabel5 = new JLabel();
         JLabel jLabel6 = new JLabel();
         JLabel jLabel7 = new JLabel();
-        // Variables declaration - do not modify//GEN-BEGIN:variables
         JPanel left = new JPanel();
         JLabel jLabel1 = new JLabel();
         JLabel jLabel2 = new JLabel();
-        JTextField ipTextField = new JTextField();
+        ipComboBox = new JComboBox<>(domainValues);
         JLabel jLabel3 = new JLabel();
-        JTextField jPortField = new JTextField();
+        jPortField = new JTextField();
         JButton jButton1 = new JButton();
         JLabel jLabel4 = new JLabel();
         JButton jButton2 = new JButton();
@@ -53,38 +56,35 @@ public class Login extends javax.swing.JFrame {
         right.setBackground(new java.awt.Color(0, 102, 102));
         right.setPreferredSize(new java.awt.Dimension(400, 500));
 
-       // jLabel5.setIcon(new ImageIcon(Login.class.getResource("/Icon/logo.png"))); // NOI18N
         jLabel5.setIcon(new ImageIcon(Objects.requireNonNull(Login.class.getResource("/Icon/ADC_bg1.png"))));
-        jLabel6.setFont(new java.awt.Font("Showcased Gothic", Font.BOLD, 24)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Showcased Gothic", Font.BOLD, 24));
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("   RFID CVENT");
 
-        jLabel7.setFont(new java.awt.Font("Segue UI Light", Font.PLAIN, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segue UI Light", Font.PLAIN, 14));
         jLabel7.setForeground(new java.awt.Color(204, 204, 204));
         jLabel7.setText("copyright © CVENT All rights reserved");
 
-        javax.swing.GroupLayout RightLayout = new javax.swing.GroupLayout(right);
-        right.setLayout(RightLayout);
-        RightLayout.setHorizontalGroup(
-                RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RightLayout.createSequentialGroup()
+        javax.swing.GroupLayout rightLayout = new javax.swing.GroupLayout(right);
+        right.setLayout(rightLayout);
+        rightLayout.setHorizontalGroup(
+                rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightLayout.createSequentialGroup()
                                 .addGap(0, 81, Short.MAX_VALUE)
                                 .addComponent(jLabel7)
                                 .addGap(40, 40, 40))
-                        .addGroup(RightLayout.createSequentialGroup()
-                                .addGroup(RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(RightLayout.createSequentialGroup()
+                        .addGroup(rightLayout.createSequentialGroup()
+                                .addGroup(rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(rightLayout.createSequentialGroup()
                                                 .addGap(103, 103, 103)
                                                 .addComponent(jLabel6))
-                                        .addGroup(RightLayout.createSequentialGroup()
-                                               // .addGap(145, 145, 145)
+                                        .addGroup(rightLayout.createSequentialGroup()
                                                 .addComponent(jLabel5)))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        RightLayout.setVerticalGroup(
-                RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(RightLayout.createSequentialGroup()
-                                //.addGap(136, 136, 136)
+        rightLayout.setVerticalGroup(
+                rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(rightLayout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(26, 26, 26)
                                 .addComponent(jLabel6)
@@ -99,84 +99,70 @@ public class Login extends javax.swing.JFrame {
         left.setBackground(new java.awt.Color(255, 255, 255));
         left.setMinimumSize(new java.awt.Dimension(400, 500));
 
-        jLabel1.setFont(new java.awt.Font("Segue UI", Font.BOLD, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segue UI", Font.BOLD, 36));
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("192.168.1.88");
 
-        jLabel2.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel2.setFont(new java.awt.Font("Segue UI", Font.PLAIN, 16)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segue UI", Font.PLAIN, 16));
         jLabel2.setText("IP Address");
 
-        ipTextField.setFont(new java.awt.Font("Segue UI", Font.PLAIN, 16)); // NOI18N
-        // ipTextField.setForeground(new java.awt.Color(102, 102, 102));
-        ipTextField.setText("192.168.1.88");
-        ipTextField.setEditable(false);
-        //jTextField1.setEnabled(false);
+        ipComboBox.setFont(new java.awt.Font("Segue UI", Font.PLAIN, 16));
 
-        jLabel3.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel3.setFont(new java.awt.Font("Segue UI", Font.PLAIN, 16)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segue UI", Font.PLAIN, 16));
         jLabel3.setText("Port");
 
-        jPortField.setText("443");
         jPortField.setFont(new java.awt.Font("Segue UI", Font.PLAIN, 16));
+        jPortField.setText("444");
         jPortField.setEditable(false);
 
         jButton1.setBackground(new java.awt.Color(0, 102, 102));
-        jButton1.setFont(new java.awt.Font("Segue UI", Font.PLAIN, 16)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Segue UI", Font.PLAIN, 16));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Connect");
-        jButton1.addActionListener(this::jButton2ActionPerformed);
+
+        ipComboBox.addActionListener(e -> updatePortField(ipComboBox, jPortField));
 
         jLabel4.setText("I don't have an account");
 
-        jButton2.setFont(new java.awt.Font("Segue UI", Font.PLAIN, 14)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Segue UI", Font.PLAIN, 14));
         jButton2.setForeground(new java.awt.Color(255, 51, 51));
         jButton2.setText("Sign Up");
-        jButton2.addActionListener(this::jButton2ActionPerformed);
+        jButton1.addActionListener(this::jButton1ActionPerformed);
 
-        javax.swing.GroupLayout LeftLayout = new javax.swing.GroupLayout(left);
-        left.setLayout(LeftLayout);
-        LeftLayout.setHorizontalGroup(
-                LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(LeftLayout.createSequentialGroup()
-                                .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(LeftLayout.createSequentialGroup()
+        javax.swing.GroupLayout leftLayout = new javax.swing.GroupLayout(left);
+        left.setLayout(leftLayout);
+        leftLayout.setHorizontalGroup(
+                leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(leftLayout.createSequentialGroup()
+                                .addGroup(leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(leftLayout.createSequentialGroup()
                                                 .addGap(138, 138, 138)
                                                 .addComponent(jLabel1))
-                                        .addGroup(LeftLayout.createSequentialGroup()
+                                        .addGroup(leftLayout.createSequentialGroup()
                                                 .addGap(30, 30, 30)
-                                                .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                                .addComponent(jLabel2)
-                                                                .addComponent(ipTextField)
-                                                                .addComponent(jLabel3)
-                                                                .addComponent(jPortField, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
-                                                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(LeftLayout.createSequentialGroup()
-
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        ))))
+                                                .addGroup(leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(jLabel2)
+                                                        .addComponent(ipComboBox, 0, 343, Short.MAX_VALUE)
+                                                        .addComponent(jLabel3)
+                                                        .addComponent(jPortField)
+                                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addContainerGap(27, Short.MAX_VALUE))
         );
-        LeftLayout.setVerticalGroup(
-                LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(LeftLayout.createSequentialGroup()
-                                .addGap(40,40,40)
+        leftLayout.setVerticalGroup(
+                leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(leftLayout.createSequentialGroup()
+                                .addGap(40, 40, 40)
                                 .addComponent(jLabel1)
                                 .addGap(40, 40, 40)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(ipTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ipComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jPortField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
-                                .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-
-                                )
                                 .addContainerGap(77, Short.MAX_VALUE))
         );
 
@@ -205,8 +191,8 @@ public class Login extends javax.swing.JFrame {
 
 
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        System.out.println("Button clicked connect");
         RFID_Starter RFIDStarterFrame = new RFID_Starter();
         RFIDStarterFrame.setVisible(true);
         RFIDStarterFrame.pack();
@@ -214,6 +200,15 @@ public class Login extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-
+    private void updatePortField(JComboBox<String> comboBox, JTextField portField) {
+        System.out.println("combo box clicked");
+        String selectedDomain = (String) comboBox.getSelectedItem();
+        System.out.println(selectedDomain);
+        if ("eventsdev.adc.coop".equals(selectedDomain)) {
+            portField.setText("444");
+        } else {
+            portField.setText("443");
+        }
+    }
     // End of variables declaration//GEN-END:variables
 }

@@ -14,7 +14,9 @@ public class RFID_Starter extends javax.swing.JFrame {
     private javax.swing.JButton stopButton;
     private javax.swing.JPanel jPanel1;
     public static String token = "";
-    public static int isBsicAuth = 0; //Restrict get and put method for login, start and stop
+    public static int isBsicAuth = 0;
+    private static String ip =(String)Login.ipComboBox.getSelectedItem();
+    private static String port = Login.jPortField.getText() ;
 
     public RFID_Starter() {
         initComponents();
@@ -22,7 +24,8 @@ public class RFID_Starter extends javax.swing.JFrame {
 
     // <editor-fold default state="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
+        System.out.println("url is : https://"+ip+":"+port+"/RFIDStartCheck.php?Flag=1");
+        System.out.println();
         jPanel1 = new javax.swing.JPanel();
         JPanel jPanel2 = new JPanel();
         JLabel jLabel1 = new JLabel();
@@ -232,7 +235,8 @@ public class RFID_Starter extends javax.swing.JFrame {
                 message = "Internal Error Occurred " + ex;
             }
             if(Utils.statusCode==200){
-                url= "https://events.adc.coop/RFIDStartCheck.php?Flag=1";
+               // url= "https://events.adc.coop/RFIDStartCheck.php?Flag=1";
+                url = "https://"+ip+":"+port+"/RFIDStartCheck.php?Flag=1";
                 try {
                     String response = String.valueOf(CventUtils.WebServiceCall(url));
                     System.out.println("response of cvent server :"+response);
@@ -283,7 +287,8 @@ public class RFID_Starter extends javax.swing.JFrame {
                 message = "Bearer token has expired click login to update token and stop again";
             }
             if(Utils.statusCode==200){
-                url = "https://events.adc.coop/RFIDStartCheck.php?Flag=0";
+                //url = "https://events.adc.coop/RFIDStartCheck.php?Flag=0";
+                url = "https://"+ip+":"+port+"/RFIDStartCheck.php?Flag=0";
                 try {
                     String response = String.valueOf(CventUtils.WebServiceCall(url));
                     System.out.println("Response is :"+response);
