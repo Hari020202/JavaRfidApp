@@ -15,8 +15,8 @@ public class RFID_Starter extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     public static String token = "";
     public static int isBsicAuth = 0;
-    private static String ip =(String)Login.ipComboBox.getSelectedItem();
-    private static String port = Login.jPortField.getText() ;
+    private static final String ip =(String)Login.ipComboBox.getSelectedItem();
+    private static final String port = Login.jPortField.getText() ;
 
     public RFID_Starter() {
         initComponents();

@@ -2,7 +2,7 @@
 package Controllers;
 
 
-import jdk.nashorn.internal.scripts.JD;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class Login extends javax.swing.JFrame {
 
-    private static String[] domainValues = {"eventsdev.adc.coop","events.adc.coop"};
+    private static final String[] domainValues = {"eventsdev.adc.coop","events.adc.coop"};
     public static JTextField jPortField;
     public static JComboBox<String> ipComboBox;
     public Login() {
