@@ -183,140 +183,133 @@ public class RFID_Starter extends javax.swing.JFrame {
         pack();
 
         //Button Action
-
-        loginButton.addActionListener(evt -> {
-            isBsicAuth = 1;
-            System.out.println("Login button clicked");
-            String code = updateBearerToken();
-            String message = "Login Failed";
-            if(code.equals("0")) {
-                message = "Login Successfully";
-                startButton.setEnabled(true);
-                stopButton.setEnabled(false);
-            }
-            JOptionPane.showMessageDialog(
-                   jPanel1,
-                    message,
-                    "Message",
-                    JOptionPane.INFORMATION_MESSAGE
-            );
-        });
-
-        startButton.addActionListener(evt -> {
-            int choice = JOptionPane.showConfirmDialog(
-                    jPanel1,
-                    "are you sure you want to start the RFID Reader",
-                    "Message",
-                    JOptionPane.YES_NO_OPTION
-            );
-            if(choice==NO_OPTION){
-                return;
-            }
-            isBsicAuth = 0;
-            System.out.println("Start button clicked");
-            String message;
-            String url = "https://192.168.1.88/cloud/start";
-            try {
-                String response = String.valueOf(Utils.WebServiceCall(url));
-                if (Utils.statusCode == 200) {
-                    System.out.println("Reader Started Successfully");
-                    message = "Reader Started Successfully";
-                    startButton.setEnabled(false);
-                    stopButton.setEnabled(true);
-                } else {
-                    System.out.println("Something went wrong");
-                    message = "Reader Failed to start";
-                }
-                System.out.println("Response is :" + response);
-            } catch (Exception ex) {
-                startButton.setEnabled(true);
-                stopButton.setEnabled(true);
-                System.out.println("Status code :" + Utils.statusCode);
-                message = "Internal Error Occurred " + ex;
-            }
-            if(Utils.statusCode==200){
-               // url= "https://events.adc.coop/RFIDStartCheck.php?Flag=1";
-                url = "https://"+ip+":"+port+"/RFIDStartCheck.php?Flag=1";
-                try {
-                    String response = String.valueOf(CventUtils.WebServiceCall(url));
-                    System.out.println("response of cvent server :"+response);
-                } catch (Exception ex) {
-                    message = "RFID reader started but failed to reach CVENT server";
-                    System.out.println("Internal Error Occured "+ex);
-                }
-            }
-            JOptionPane.showMessageDialog(
-                    jPanel1,
-                    message,
-                    "Message",
-                    JOptionPane.INFORMATION_MESSAGE
-            );
-        });
-
-        stopButton.addActionListener(evt -> {
-            int choice = JOptionPane.showConfirmDialog(
-                    jPanel1,
-                    "are you sure you want to stop the RFID Reader",
-                    "Message",
-                    JOptionPane.YES_NO_OPTION
-            );
-            if(choice==NO_OPTION){
-                return;
-            }
-            isBsicAuth = 1;
-            System.out.println("Stop button clicked");
-            String code = updateBearerToken();
-            String url = "https://192.168.1.88/cloud/stop";
-            String message = "Reader Failed to Stop";
-            System.out.println("Code :"+code);
-            try {
-                isBsicAuth = 0;
-                String response = String.valueOf(Utils.WebServiceCall(url));
-                if (Utils.statusCode == 200) {
-                    System.out.println("Reader Stopped Successfully");
-                    message = "Reader Stopped Successfully";
-                    startButton.setEnabled(false);
-                    stopButton.setEnabled(false);
-                } else {
-                    System.out.println("Something went wrong");
-                }
-                System.out.println("Response is :" + response);
-            } catch (Exception ex) {
-                startButton.setEnabled(true);
-                stopButton.setEnabled(true);
-                message = "Bearer token has expired click login to update token and stop again";
-            }
-            if(Utils.statusCode==200){
-                //url = "https://events.adc.coop/RFIDStartCheck.php?Flag=0";
-                url = "https://"+ip+":"+port+"/RFIDStartCheck.php?Flag=0";
-                try {
-                    String response = String.valueOf(CventUtils.WebServiceCall(url));
-                    System.out.println("Response is :"+response);
-                } catch (Exception ex) {
-                    System.out.println("Internal Error Occured "+ex);
-                    message = "RFID reader stopped but failed to reach CVENT server";
-                }
-            }
-            JOptionPane.showMessageDialog(
-                    jPanel1,
-                    message,
-                    "Message",
-                    JOptionPane.INFORMATION_MESSAGE
-            );
-        });
-
-    }// </editor-fold>//GEN-END:initComponents
-
-
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(() -> new RFID_Starter().setVisible(true));
+        loginButton.addActionListener(evt -> loginAction());
+        startButton.addActionListener(evt -> startAction());
+        stopButton.addActionListener(evt -> stopAction());
     }
 
-   public String updateBearerToken(){
+    private void stopAction() {
+        int choice = JOptionPane.showConfirmDialog(
+                jPanel1,
+                "are you sure you want to stop the RFID Reader",
+                "Message",
+                JOptionPane.YES_NO_OPTION
+        );
+        if(choice==NO_OPTION){
+            return;
+        }
+        isBsicAuth = 1;
+        System.out.println("Stop button clicked");
+        String code = updateBearerToken();
+        String url = "https://192.168.1.88/cloud/stop";
+        String message = "Reader Failed to Stop";
+        System.out.println("Code :"+code);
+        try {
+            isBsicAuth = 0;
+            String response = String.valueOf(Utils.WebServiceCall(url));
+            if (Utils.statusCode == 200) {
+                System.out.println("Reader Stopped Successfully");
+                message = "Reader Stopped Successfully";
+                startButton.setEnabled(false);
+                stopButton.setEnabled(false);
+            } else {
+                System.out.println("Something went wrong");
+            }
+            System.out.println("Response is :" + response);
+        } catch (Exception ex) {
+            startButton.setEnabled(true);
+            stopButton.setEnabled(true);
+            message = "Bearer token has expired click login to update token and stop again";
+        }
+        if(Utils.statusCode==200){
+            //url = "https://events.adc.coop/RFIDStartCheck.php?Flag=0";
+            url = "https://"+ip+":"+port+"/RFIDStartCheck.php?Flag=0";
+            try {
+                String response = String.valueOf(CventUtils.WebServiceCall(url));
+                System.out.println("Response is :"+response);
+            } catch (Exception ex) {
+                System.out.println("Internal Error Occured "+ex);
+                message = "RFID reader stopped but failed to reach CVENT server"+url+" ex :"+ex;;
+            }
+        }
+        JOptionPane.showMessageDialog(
+                jPanel1,
+                message,
+                "Message",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+
+    private void startAction() {
+        int choice = JOptionPane.showConfirmDialog(
+                jPanel1,
+                "are you sure you want to start the RFID Reader",
+                "Message",
+                JOptionPane.YES_NO_OPTION
+        );
+        if(choice==NO_OPTION){
+            return;
+        }
+        isBsicAuth = 0;
+        System.out.println("Start button clicked");
+        String message;
+        String url = "https://192.168.1.88/cloud/start";
+        try {
+            String response = String.valueOf(Utils.WebServiceCall(url));
+            if (Utils.statusCode == 200) {
+                System.out.println("Reader Started Successfully");
+                message = "Reader Started Successfully";
+                startButton.setEnabled(false);
+                stopButton.setEnabled(true);
+            } else {
+                System.out.println("Something went wrong");
+                message = "Reader Failed to start";
+            }
+            System.out.println("Response is :" + response);
+        } catch (Exception ex) {
+            startButton.setEnabled(true);
+            stopButton.setEnabled(true);
+            System.out.println("Status code :" + Utils.statusCode);
+            message = "Internal Error Occurred " + ex;
+        }
+        if(Utils.statusCode==200){
+            // url= "https://events.adc.coop/RFIDStartCheck.php?Flag=1";
+            url = "https://"+ip+":"+port+"/RFIDStartCheck.php?Flag=1";
+            try {
+                String response = String.valueOf(CventUtils.WebServiceCall(url));
+                System.out.println("response of cvent server :"+response);
+            } catch (Exception ex) {
+                message = "RFID reader started but failed to reach CVENT server "+url+" ex :"+ex;
+                System.out.println("Internal Error Occured "+ex);
+            }
+        }
+        JOptionPane.showMessageDialog(
+                jPanel1,
+                message,
+                "Message",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+
+    private void loginAction() {
+        isBsicAuth = 1;
+        System.out.println("Login button clicked");
+        String code = updateBearerToken();
+        String message = "Login Failed";
+        if(code.equals("0")) {
+            message = "Login Successfully";
+            startButton.setEnabled(true);
+            stopButton.setEnabled(false);
+        }
+        JOptionPane.showMessageDialog(
+                jPanel1,
+                message,
+                "Message",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+
+    public String updateBearerToken(){
         String url = "https://192.168.1.88/cloud/localRestLogin";
         String code = "";
         try {
@@ -329,5 +322,13 @@ public class RFID_Starter extends javax.swing.JFrame {
         }
         return code;
     }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        java.awt.EventQueue.invokeLater(() -> new RFID_Starter().setVisible(true));
+    }
+
     // End of variables declaration//GEN-END:variables
 }
