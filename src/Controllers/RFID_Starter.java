@@ -127,6 +127,11 @@ public class RFID_Starter extends javax.swing.JFrame {
         stopButton.setPreferredSize(new java.awt.Dimension(100, 30));
         stopButton.setEnabled(false);
 
+        //Button Action
+        loginButton.addActionListener(evt -> loginAction());
+        startButton.addActionListener(evt -> startAction());
+        stopButton.addActionListener(evt -> stopAction());
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -182,10 +187,6 @@ public class RFID_Starter extends javax.swing.JFrame {
 
         pack();
 
-        //Button Action
-        loginButton.addActionListener(evt -> loginAction());
-        startButton.addActionListener(evt -> startAction());
-        stopButton.addActionListener(evt -> stopAction());
     }
 
     private void stopAction() {
@@ -229,7 +230,7 @@ public class RFID_Starter extends javax.swing.JFrame {
                 System.out.println("Response is :"+response);
             } catch (Exception ex) {
                 System.out.println("Internal Error Occured "+ex);
-                message = "RFID reader stopped but failed to reach CVENT server"+url+" ex :"+ex;;
+                message = "RFID reader stopped but failed to reach CVENT server"+url+" ex :"+ex;
             }
         }
         JOptionPane.showMessageDialog(
